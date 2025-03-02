@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class Carts {
     private Long customerId;
-    private Map<Long, Map<Long, Integer>> carts = new HashMap<>();
+    private static final Map<Long, Map<Long, Integer>> carts = new HashMap<>();
 
     public Map<Long,Integer> getCart(Long customerId) {
         if(!carts.containsKey(customerId)) {

@@ -1,38 +1,20 @@
+import exceptions.CartNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Orders {
     private Long orderId;
     private Long customerId;
-    private Map<Long, Integer> orders;
+    private static final Carts cart = new Carts();
+    private static final Map<Long, Map<Long, Integer>> orders = new HashMap<>();
 
-    public Orders(Long orderId, Long customerId, Map<Long, Integer> books) {
-        this.orderId = orderId;
-        this.customerId =customerId;
-        this.orders = new HashMap<Long, Integer>();
+    public void placeOrder(Long orderId, Long customerId) throws CartNotFoundException {
+        Map <Long, Integer> cartItems = cart.getCart(customerId);
+        if(cartItems.isEmpty()) {
+            throw new CartNotFoundException("Cart not found");
+        }
+        orders.put(orderId, cartItems);
     }
 
-    public Long getOrderId() {
-        return orderId;
-    }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public Map<Long, Integer> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Map<Long, Integer> orders) {
-        this.orders = orders;
-    }
 }
