@@ -1,13 +1,14 @@
 package resource;
 
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import exceptions.BookNotFoundException;
+import exceptions.InvalidInputException;
 import model.Book;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Path("/books")
@@ -15,12 +16,18 @@ import java.util.ArrayList;
 @Consumes(MediaType.APPLICATION_JSON)
 public class BookResource {
 
-    ArrayList<Book> books = new ArrayList<>();
+    static ArrayList<Book> books = new ArrayList<>();
 
     @POST
-    public Response addBook(Book book) {
+    public Response addBook(Book book) throws InvalidInputException {
         books.add(book);
         return Response.status(Response.Status.CREATED).entity(book).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBook(Book book) throws BookNotFoundException {
+        return Response.status(Response.Status.OK).entity(books).build();
     }
 
 }

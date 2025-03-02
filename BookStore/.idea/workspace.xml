@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c9182eb-aebd-41fe-a715-d98d430e3978" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/BookStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BookStoreServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Carts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Carts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BookStore.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/resource/BookResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resource/BookResource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,21 +26,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "chalakabuthsara"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;chalakabuthsara&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/chalakabuthsara/bookStore.git",
-    "accountId": "cc63422d-0e9d-44bc-809d-dad3ee8972d1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/chalakabuthsara/bookStore.git&quot;,
+    &quot;accountId&quot;: &quot;cc63422d-0e9d-44bc-809d-dad3ee8972d1&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2tj5e9eWHbbJ790WQzK3O8In1tI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -50,6 +49,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BookStore.executor": "Run",
+    "Application.BookStoreServer.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
