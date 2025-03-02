@@ -1,3 +1,5 @@
+package model;
+
 public class Book {
     private Long bookId;
     private String title;

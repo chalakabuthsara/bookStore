@@ -1,3 +1,5 @@
+package model;
+
 public class Customer {
     private Long customerId;
     private String firstName;

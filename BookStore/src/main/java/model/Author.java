@@ -1,3 +1,5 @@
+package model;
+
 public class Author {
     private Long authorId;
     private String firstName;

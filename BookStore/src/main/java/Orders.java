@@ -4,12 +4,12 @@ import java.util.Map;
 public class Orders {
     private Long orderId;
     private Long customerId;
-    private Map<Long, Integer> books;
+    private Map<Long, Integer> orders;
 
     public Orders(Long orderId, Long customerId, Map<Long, Integer> books) {
         this.orderId = orderId;
         this.customerId =customerId;
-        this.books = new HashMap<Long, Integer>();
+        this.orders = new HashMap<Long, Integer>();
     }
 
     public Long getOrderId() {
@@ -28,11 +28,11 @@ public class Orders {
         this.customerId = customerId;
     }
 
-    public Map<Long, Integer> getBooks() {
-        return books;
+    public Map<Long, Integer> getOrders() {
+        return orders;
     }
 
-    public void setBooks(Map<Long, Integer> books) {
-        this.books = books;
+    public void setOrders(Map<Long, Integer> orders) {
+        this.orders = orders;
     }
 }
