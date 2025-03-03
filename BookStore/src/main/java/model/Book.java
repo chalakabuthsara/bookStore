@@ -3,7 +3,7 @@ package model;
 public class Book {
     private Long bookId;
     private String title;
-    private int authorId;
+    private Long authorId;
     private int isbn;
     private int publicationYear;
     private double price;
@@ -11,7 +11,7 @@ public class Book {
 
     public Book(){}
 
-    public Book(Long bookId, String title, int authorId, int isbn, int publicationYear, double price, int stockQuantity) {
+    public Book(Long bookId, String title, Long authorId, int isbn, int publicationYear, double price, int stockQuantity) {
         this.bookId = bookId;
         this.title = title;
         this.authorId = authorId;
@@ -37,11 +37,11 @@ public class Book {
         this.title = title;
     }
 
-    public int getAuthorId() {
+    public Long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
 
