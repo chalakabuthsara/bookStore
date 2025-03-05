@@ -4,7 +4,6 @@ import exceptions.AuthorNotFoundException;
 import exceptions.BookNotFoundException;
 import exceptions.InvalidInputException;
 import model.Author;
-import model.Book;
 import service.AuthorService;
 
 import javax.ws.rs.*;
@@ -16,7 +15,7 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class AuthorResource {
 
-    private final AuthorService authorService = new AuthorService();
+    private final AuthorService authorService = AuthorService.getInstance();
 
     @POST
     public Response addAuthor(Author author) throws InvalidInputException {

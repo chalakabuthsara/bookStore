@@ -8,8 +8,21 @@ import model.Book;
 import java.util.ArrayList;
 
 public class AuthorService {
-    private static ArrayList<Author> authors = new ArrayList<>();
+    private static AuthorService instance;
+    private ArrayList<Author> authors;
     private final BookService bookService = BookService.getInstance();
+
+    private AuthorService() {
+        authors = new ArrayList<>();
+    }
+
+    public static AuthorService getInstance() {
+        if(instance == null) {
+            instance = new AuthorService();
+        }
+        return instance;
+    }
+
 
     public ArrayList<Author> getAuthors() {
         return authors;
