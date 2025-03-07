@@ -54,7 +54,6 @@ public class CartService {
        }
        cart.setBook(book);
        cart.setQuantity(cart.getQuantity() + 1);
-       book.setStockQuantity(book.getStockQuantity() - 1);
     }
 
     public ArrayList<Book> getItems(Long customerId) throws CustomerNotFoundException, CartNotFoundException {
@@ -86,6 +85,10 @@ public class CartService {
             }
         }
         throw new BookNotFoundException("Book " + bookId + " not found");
+    }
+
+    public void clearItems(Long customerId) throws CustomerNotFoundException, CartNotFoundException {
+        carts.remove(getCart(customerId));
     }
 
 }

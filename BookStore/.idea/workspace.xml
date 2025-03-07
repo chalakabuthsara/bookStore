@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c9182eb-aebd-41fe-a715-d98d430e3978" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/OrderNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resource/BookResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resource/BookResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/resource/CartResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resource/CartResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/AuthorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/AuthorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/Carts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/Orders.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resource/OrderResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resource/OrderResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/OrderService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
