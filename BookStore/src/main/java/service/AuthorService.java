@@ -38,6 +38,7 @@ public class AuthorService {
                 return author;
             }
         }
+
         throw new AuthorNotFoundException("Author " + id + " not found");
     }
 

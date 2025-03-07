@@ -9,9 +9,6 @@ import exceptions.InvalidInputException;
 import model.Book;
 import service.BookService;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 
 @Path("/books")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,11 +19,6 @@ public class BookResource {
 
     @POST
     public Response addBook(Book book) throws InvalidInputException {
-        if (book == null || book.getBookId() == null || book.getAuthorId() == null || book.getTitle() == null ||
-                book.getPrice() == 0) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "bookId, authorId, title, price");
-        }
         bookService.addBook(book);
         return Response.status(Response.Status.CREATED).entity(book).build();
     }
@@ -45,11 +37,6 @@ public class BookResource {
     @PUT
     @Path("/{id}")
     public Response updateBook(@PathParam("id") Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException {
-        if (updatedBook == null || updatedBook.getBookId() == null || updatedBook.getAuthorId() == null ||
-                updatedBook.getTitle() == null || updatedBook.getPrice() == 0) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "bookId, authorId, title, price");
-        }
 
         return Response.status(Response.Status.OK).entity(bookService.updateBook(id, updatedBook)).build();
     }

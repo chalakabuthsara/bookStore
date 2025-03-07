@@ -1,6 +1,7 @@
 package service;
 
 import exceptions.BookNotFoundException;
+import exceptions.InvalidInputException;
 import model.Book;
 
 import javax.ws.rs.core.Response;
@@ -21,7 +22,12 @@ public class BookService {
         return instance;
     }
 
-    public void addBook(Book book) {
+    public void addBook(Book book) throws InvalidInputException {
+        if (book == null || book.getBookId() == null || book.getAuthorId() == null || book.getTitle() == null ||
+                book.getPrice() == 0) {
+            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
+                    "bookId, authorId, title, price");
+        }
         books.add(book);
     }
 
@@ -38,7 +44,12 @@ public class BookService {
         throw new BookNotFoundException("Book with" + id + "not found");
     }
 
-    public Book updateBook(Long id, Book updatedBook) throws BookNotFoundException {
+    public Book updateBook(Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException {
+        if (updatedBook == null || updatedBook.getBookId() == null || updatedBook.getAuthorId() == null ||
+                updatedBook.getTitle() == null || updatedBook.getPrice() == 0) {
+            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
+                    "bookId, authorId, title, price");
+        }
         for(Book book: books) {
             if(book.getBookId().equals(id)) {
                 book.setTitle(updatedBook.getTitle());
