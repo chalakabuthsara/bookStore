@@ -39,7 +39,7 @@ public class AuthorService {
             }
         }
 
-        throw new AuthorNotFoundException("Author " + id + " not found");
+        throw new AuthorNotFoundException("Author with id: " + id + " not found");
     }
 
     public Author updateAuthor(Long id, Author updatedAuthor) throws AuthorNotFoundException {
@@ -50,7 +50,7 @@ public class AuthorService {
                 author.setBiography(updatedAuthor.getBiography());
             }
         }
-        throw new AuthorNotFoundException("Author " + id + " not found");
+        throw new AuthorNotFoundException("Author with id: " + id + " not found");
     }
 
     public void deleteAuthor(Long id) throws AuthorNotFoundException {
@@ -60,7 +60,7 @@ public class AuthorService {
                 return;
             }
         }
-        throw new AuthorNotFoundException("Author " + id + " not found");
+        throw new AuthorNotFoundException("Author with id: " + id + " not found");
     }
 
     public ArrayList<Book> getAuthorBooks(Long id) throws BookNotFoundException, AuthorNotFoundException {
@@ -72,7 +72,7 @@ public class AuthorService {
             }
         }
         if (!authorIdExists) {
-            throw new AuthorNotFoundException("Author " + id + " not found");
+            throw new AuthorNotFoundException("Author with id: " + id + " not found");
         }
 
         ArrayList<Book>  booksOfAuthor = new ArrayList<>();
@@ -83,7 +83,7 @@ public class AuthorService {
         }
 
         if (booksOfAuthor.isEmpty()) {
-            throw new BookNotFoundException("Books with author " + id + " not found");
+            throw new BookNotFoundException("Books with author id: " + id + " not found");
         }
 
         return booksOfAuthor;

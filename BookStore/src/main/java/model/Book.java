@@ -4,14 +4,14 @@ public class Book {
     private Long bookId;
     private String title;
     private Long authorId;
-    private int isbn;
+    private Long isbn;
     private int publicationYear;
     private double price;
     private int stockQuantity;
 
     public Book(){}
 
-    public Book(Long bookId, String title, Long authorId, int isbn, int publicationYear, double price, int stockQuantity) {
+    public Book(Long bookId, String title, Long authorId, Long isbn, int publicationYear, double price, int stockQuantity) {
         this.bookId = bookId;
         this.title = title;
         this.authorId = authorId;
@@ -45,11 +45,11 @@ public class Book {
         this.authorId = authorId;
     }
 
-    public int getIsbn() {
+    public Long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn = isbn;
     }
 

@@ -1,10 +1,11 @@
 package service;
 
+import exceptions.AuthorNotFoundException;
 import exceptions.BookNotFoundException;
 import exceptions.InvalidInputException;
 import model.Book;
 
-import javax.ws.rs.core.Response;
+import java.time.Year;
 import java.util.ArrayList;
 
 public class BookService {
@@ -22,12 +23,33 @@ public class BookService {
         return instance;
     }
 
-    public void addBook(Book book) throws InvalidInputException {
-        if (book == null || book.getBookId() == null || book.getAuthorId() == null || book.getTitle() == null ||
-                book.getPrice() == 0) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "bookId, authorId, title, price");
+    public void addBook(Book book) throws InvalidInputException, AuthorNotFoundException {
+        if (book == null) {
+            throw new InvalidInputException("Book information is missing.");
         }
+
+        if (book.getBookId() == null || book.getBookId().toString().trim().isEmpty()) {
+            throw new InvalidInputException("bookId shouldn't be empty.");
+        }
+
+        if (book.getAuthorId() == null || book.getAuthorId().toString().trim().isEmpty()) {
+            throw new InvalidInputException("authorId shouldn't be empty.");
+        }
+
+        if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
+            throw new InvalidInputException("title shouldn't be empty.");
+        }
+
+        if (book.getPrice() <= 0) {
+            throw new InvalidInputException("price shouldn't be zero or negative.");
+        }
+        int currentYear = Year.now().getValue();
+        if (book.getPublicationYear() > currentYear) {
+            throw new InvalidInputException("Publication year cannot be in the future.");
+        }
+        AuthorService authorService = AuthorService.getInstance();
+        authorService.getAuthor(book.getAuthorId());
+
         books.add(book);
     }
 
@@ -41,15 +63,36 @@ public class BookService {
                 return book;
             }
         }
-        throw new BookNotFoundException("Book with" + id + "not found");
+        throw new BookNotFoundException("Book with id: " + id + " not found");
     }
 
-    public Book updateBook(Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException {
-        if (updatedBook == null || updatedBook.getBookId() == null || updatedBook.getAuthorId() == null ||
-                updatedBook.getTitle() == null || updatedBook.getPrice() == 0) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "bookId, authorId, title, price");
+    public Book updateBook(Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException, AuthorNotFoundException {
+        if (updatedBook == null) {
+            throw new InvalidInputException("Book information is missing.");
         }
+
+        if (updatedBook.getBookId() == null || updatedBook.getBookId().toString().trim().isEmpty()) {
+            throw new InvalidInputException("bookId shouldn't be empty.");
+        }
+
+        if (updatedBook.getAuthorId() == null || updatedBook.getAuthorId().toString().trim().isEmpty()) {
+            throw new InvalidInputException("authorId shouldn't be empty.");
+        }
+
+        if (updatedBook.getTitle() == null || updatedBook.getTitle().trim().isEmpty()) {
+            throw new InvalidInputException("title shouldn't be empty.");
+        }
+
+        if (updatedBook.getPrice() <= 0) {
+            throw new InvalidInputException("price shouldn't be zero or negative.");
+        }
+        int currentYear = Year.now().getValue();
+        if (updatedBook.getPublicationYear() > currentYear) {
+            throw new InvalidInputException("Publication year cannot be in the future.");
+        }
+        AuthorService authorService = AuthorService.getInstance();
+        authorService.getAuthor(updatedBook.getAuthorId());
+
         for(Book book: books) {
             if(book.getBookId().equals(id)) {
                 book.setTitle(updatedBook.getTitle());
@@ -61,7 +104,7 @@ public class BookService {
                 return book;
             }
         }
-        throw new BookNotFoundException("Book with" + id + "not found");
+        throw new BookNotFoundException("Book with id: " + id + " not found");
     }
 
     public void deleteBook(Long id) throws BookNotFoundException {
@@ -71,6 +114,6 @@ public class BookService {
                 return;
             }
         }
-        throw new BookNotFoundException("Book with ID " + id + " not found");
+        throw new BookNotFoundException("Book with id: " + id + " not found");
     }
 }

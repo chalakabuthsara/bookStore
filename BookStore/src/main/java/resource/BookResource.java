@@ -4,6 +4,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import exceptions.AuthorNotFoundException;
 import exceptions.BookNotFoundException;
 import exceptions.InvalidInputException;
 import model.Book;
@@ -18,7 +19,7 @@ public class BookResource {
     private final BookService bookService = BookService.getInstance();
 
     @POST
-    public Response addBook(Book book) throws InvalidInputException {
+    public Response addBook(Book book) throws InvalidInputException, AuthorNotFoundException {
         bookService.addBook(book);
         return Response.status(Response.Status.CREATED).entity(book).build();
     }
@@ -36,7 +37,7 @@ public class BookResource {
 
     @PUT
     @Path("/{id}")
-    public Response updateBook(@PathParam("id") Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException {
+    public Response updateBook(@PathParam("id") Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException, AuthorNotFoundException {
 
         return Response.status(Response.Status.OK).entity(bookService.updateBook(id, updatedBook)).build();
     }
