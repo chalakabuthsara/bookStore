@@ -17,7 +17,7 @@ public class OrderResource {
     OrderService orderService = OrderService.getInstance();
 
     @POST
-    public Response placeOrder(@PathParam("customerId") Long customerId) throws CustomerNotFoundException, CartNotFoundException {
+    public Response placeOrder(@PathParam("customerId") Long customerId) throws CustomerNotFoundException, CartNotFoundException, OutOfStockException, BookNotFoundException {
         Order order = orderService.placeOrder(customerId);
         return Response.status(Response.Status.CREATED).entity(order).build();
     }

@@ -1,18 +1,20 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cart {
     private Long customerId;
-    private ArrayList<Book> books;
-    private int quantity;
+    private Map<Long, Integer> books;
+    private int totalQuantity;
 
     public Cart() {
-        books = new ArrayList<>();
+        books = new HashMap<>();
     }
 
-    public void setBooks(ArrayList<Book> books) {
-        this.books = books;
+    public void setBooks(Long bookId, int quantity) {
+        books.put(bookId, quantity);
     }
 
     public Long getCustomerId() {
@@ -23,19 +25,15 @@ public class Cart {
         this.customerId = customerId;
     }
 
-    public ArrayList<Book> getBooks() {
+    public Map<Long, Integer> getBooks() {
         return books;
     }
 
-    public void setBook(Book book) {
-        books.add(book);
+    public int getTotalQuantity() {
+        return totalQuantity;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setTotalQuantity(int totalQuantity) {
+        this.totalQuantity = totalQuantity;
     }
 }

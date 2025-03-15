@@ -24,6 +24,16 @@ public class BookService {
     }
 
     public void addBook(Book book) throws InvalidInputException, AuthorNotFoundException {
+        for (Book existingBook : books) {
+            if (existingBook.getBookId().equals(book.getBookId())) {
+                throw new InvalidInputException("Book ID already exists.");
+            }
+        }
+        for (Book existingBook : books) {
+            if (existingBook.getIsbn().equals(book.getIsbn())) {
+                throw new InvalidInputException("ISBN is already in use.");
+            }
+        }
         validateBook(book);
 
         books.add(book);
@@ -73,11 +83,6 @@ public class BookService {
         if (book == null) {
             throw new InvalidInputException("Book information is missing.");
         }
-        for (Book existingBook : books) {
-            if (existingBook.getBookId().equals(book.getBookId())) {
-                throw new InvalidInputException("Book ID already exists.");
-            }
-        }
 
         if (book.getBookId() == null || book.getBookId().toString().trim().isEmpty()) {
             throw new InvalidInputException("bookId shouldn't be empty.");
@@ -97,12 +102,6 @@ public class BookService {
         int currentYear = Year.now().getValue();
         if (book.getPublicationYear() > currentYear) {
             throw new InvalidInputException("Publication year cannot be in the future.");
-        }
-
-        for (Book existingBook : books) {
-            if (existingBook.getIsbn().equals(book.getIsbn())) {
-                throw new InvalidInputException("ISBN is already in use.");
-            }
         }
 
         AuthorService authorService = AuthorService.getInstance();

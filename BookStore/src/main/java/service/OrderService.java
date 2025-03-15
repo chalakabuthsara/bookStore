@@ -1,19 +1,23 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import exceptions.BookNotFoundException;
 import exceptions.CartNotFoundException;
 import exceptions.CustomerNotFoundException;
 import exceptions.OrderNotFoundException;
+import exceptions.OutOfStockException;
 import model.Book;
 import model.Cart;
 import model.Order;
 
-import java.util.ArrayList;
-
 public class OrderService {
     private static OrderService instance;
     private ArrayList<Order> orders;
-    private CartService cartService = CartService.getInstance();
-    private Long orderCounter = 0L;
+    private final CartService cartService = CartService.getInstance();
+    private final BookService bookService = BookService.getInstance();
+    private Long orderCounter = 1L;
 
     private OrderService() {
         orders = new ArrayList<>();
@@ -26,19 +30,38 @@ public class OrderService {
         return instance;
     }
 
-    public Order placeOrder( Long customerId) throws CustomerNotFoundException, CartNotFoundException {
-        ArrayList<Book> books = new ArrayList<>(cartService.getCart(customerId).getBooks());
+    public Order placeOrder(Long customerId)
+            throws CustomerNotFoundException, CartNotFoundException, OutOfStockException, BookNotFoundException {
+        Cart cart = cartService.getCart(customerId);
+        Map<Long, Integer> items = cart.getBooks();
         Long orderId = orderCounter++;
         double totalPrice = 0;
-        for(Book book: books) {
-            totalPrice += book.getPrice();
-            book.setStockQuantity(book.getStockQuantity()-1);
+
+        for (Long bookId : items.keySet()) {
+            Book book = bookService.getBook(bookId);
+            int quantity = items.get(bookId);
+            if (book == null) {
+                throw new BookNotFoundException("Book with id " + bookId + " not found.");
+            }
+            if (book.getStockQuantity() < quantity) {
+                throw new OutOfStockException("Not enough stock for book with id: " + bookId);
+            }
+
+            totalPrice += book.getPrice() * quantity;
         }
-        Order order = new Order(orderId, customerId, books, totalPrice);
+
+        for (Long bookId : items.keySet()) {
+            Book book = bookService.getBook(bookId);
+            int quantity = items.get(bookId);
+            book.setStockQuantity(book.getStockQuantity() - quantity);
+        }
+        Order order = new Order(orderId, customerId, items, totalPrice);
         orders.add(order);
         cartService.clearItems(customerId);
         return order;
     }
+
+
 
     public ArrayList<Order> getOrders(Long customerId) throws OrderNotFoundException {
         ArrayList<Order> customerOrders = new ArrayList<>();
@@ -57,10 +80,10 @@ public class OrderService {
 
     public Order getOrder( Long customerId, Long orderId) throws OrderNotFoundException {
         for(Order order: orders) {
-            if(order.getOrderId().equals(orderId)) {
+            if(order.getOrderId().equals(orderId) && order.getCustomerId().equals(customerId)) {
                 return order;
             }
         }
-        throw new OrderNotFoundException("Order for the customer " + customerId + " not found");
+        throw new OrderNotFoundException("Order with ID " + orderId + " for customer " + customerId + " not found");
     }
 }

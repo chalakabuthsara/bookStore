@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 public class Book {
     private Long bookId;
     private String title;
@@ -21,6 +23,8 @@ public class Book {
         this.stockQuantity = stockQuantity;
     }
 
+
+    @JsonGetter
     public Long getBookId() {
         return bookId;
     }
@@ -29,6 +33,7 @@ public class Book {
         this.bookId = bookId;
     }
 
+    @JsonGetter
     public String getTitle() {
         return title;
     }
@@ -37,6 +42,8 @@ public class Book {
         this.title = title;
     }
 
+
+    @JsonGetter
     public Long getAuthorId() {
         return authorId;
     }
@@ -45,6 +52,7 @@ public class Book {
         this.authorId = authorId;
     }
 
+    @JsonGetter
     public Long getIsbn() {
         return isbn;
     }
@@ -53,6 +61,7 @@ public class Book {
         this.isbn = isbn;
     }
 
+    @JsonGetter
     public int getPublicationYear() {
         return publicationYear;
     }
@@ -61,6 +70,7 @@ public class Book {
         this.publicationYear = publicationYear;
     }
 
+    @JsonGetter
     public double getPrice() {
         return price;
     }
@@ -69,6 +79,7 @@ public class Book {
         this.price = price;
     }
 
+    @JsonGetter
     public int getStockQuantity() {
         return stockQuantity;
     }

@@ -69,7 +69,7 @@ public class AuthorService {
             throw new InvalidInputException("Author information is missing.");
         }
         for (Author existingAuthor : authors) {
-            if (existingAuthor.getAuthorId().equals(updatedAuthor.getAuthorId())) {
+            if (!updatedAuthor.getAuthorId().equals(id) && existingAuthor.getAuthorId().equals(updatedAuthor.getAuthorId())) {
                 throw new InvalidInputException("Author ID already exists.");
             }
         }
