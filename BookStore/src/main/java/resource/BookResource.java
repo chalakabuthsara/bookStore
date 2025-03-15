@@ -46,7 +46,7 @@ public class BookResource {
     @Path("/{id}")
     public Response deleteBook(@PathParam("id") Long id) throws BookNotFoundException {
         bookService.deleteBook(id);
-        return Response.status(Response.Status.OK).entity("Book with " + id + "deleted successfully").build();
+        return Response.status(Response.Status.OK).entity("Book with id: " + id + " deleted successfully").build();
     }
 
 

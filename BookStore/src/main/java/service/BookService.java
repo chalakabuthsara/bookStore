@@ -24,31 +24,7 @@ public class BookService {
     }
 
     public void addBook(Book book) throws InvalidInputException, AuthorNotFoundException {
-        if (book == null) {
-            throw new InvalidInputException("Book information is missing.");
-        }
-
-        if (book.getBookId() == null || book.getBookId().toString().trim().isEmpty()) {
-            throw new InvalidInputException("bookId shouldn't be empty.");
-        }
-
-        if (book.getAuthorId() == null || book.getAuthorId().toString().trim().isEmpty()) {
-            throw new InvalidInputException("authorId shouldn't be empty.");
-        }
-
-        if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
-            throw new InvalidInputException("title shouldn't be empty.");
-        }
-
-        if (book.getPrice() <= 0) {
-            throw new InvalidInputException("price shouldn't be zero or negative.");
-        }
-        int currentYear = Year.now().getValue();
-        if (book.getPublicationYear() > currentYear) {
-            throw new InvalidInputException("Publication year cannot be in the future.");
-        }
-        AuthorService authorService = AuthorService.getInstance();
-        authorService.getAuthor(book.getAuthorId());
+        validateBook(book);
 
         books.add(book);
     }
@@ -67,31 +43,7 @@ public class BookService {
     }
 
     public Book updateBook(Long id, Book updatedBook) throws BookNotFoundException, InvalidInputException, AuthorNotFoundException {
-        if (updatedBook == null) {
-            throw new InvalidInputException("Book information is missing.");
-        }
-
-        if (updatedBook.getBookId() == null || updatedBook.getBookId().toString().trim().isEmpty()) {
-            throw new InvalidInputException("bookId shouldn't be empty.");
-        }
-
-        if (updatedBook.getAuthorId() == null || updatedBook.getAuthorId().toString().trim().isEmpty()) {
-            throw new InvalidInputException("authorId shouldn't be empty.");
-        }
-
-        if (updatedBook.getTitle() == null || updatedBook.getTitle().trim().isEmpty()) {
-            throw new InvalidInputException("title shouldn't be empty.");
-        }
-
-        if (updatedBook.getPrice() <= 0) {
-            throw new InvalidInputException("price shouldn't be zero or negative.");
-        }
-        int currentYear = Year.now().getValue();
-        if (updatedBook.getPublicationYear() > currentYear) {
-            throw new InvalidInputException("Publication year cannot be in the future.");
-        }
-        AuthorService authorService = AuthorService.getInstance();
-        authorService.getAuthor(updatedBook.getAuthorId());
+        validateBook(updatedBook);
 
         for(Book book: books) {
             if(book.getBookId().equals(id)) {
@@ -115,5 +67,45 @@ public class BookService {
             }
         }
         throw new BookNotFoundException("Book with id: " + id + " not found");
+    }
+
+    public void validateBook(Book book) throws InvalidInputException, AuthorNotFoundException {
+        if (book == null) {
+            throw new InvalidInputException("Book information is missing.");
+        }
+        for (Book existingBook : books) {
+            if (existingBook.getBookId().equals(book.getBookId())) {
+                throw new InvalidInputException("Book ID already exists.");
+            }
+        }
+
+        if (book.getBookId() == null || book.getBookId().toString().trim().isEmpty()) {
+            throw new InvalidInputException("bookId shouldn't be empty.");
+        }
+
+        if (book.getAuthorId() == null || book.getAuthorId().toString().trim().isEmpty()) {
+            throw new InvalidInputException("authorId shouldn't be empty.");
+        }
+
+        if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
+            throw new InvalidInputException("title shouldn't be empty.");
+        }
+
+        if (book.getPrice() <= 0) {
+            throw new InvalidInputException("price shouldn't be zero or negative.");
+        }
+        int currentYear = Year.now().getValue();
+        if (book.getPublicationYear() > currentYear) {
+            throw new InvalidInputException("Publication year cannot be in the future.");
+        }
+
+        for (Book existingBook : books) {
+            if (existingBook.getIsbn().equals(book.getIsbn())) {
+                throw new InvalidInputException("ISBN is already in use.");
+            }
+        }
+
+        AuthorService authorService = AuthorService.getInstance();
+        authorService.getAuthor(book.getAuthorId());
     }
 }

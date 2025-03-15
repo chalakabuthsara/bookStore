@@ -21,9 +21,9 @@ public class CartResource {
 
     @POST
     @Path("/items")
-    public Response addItem(@PathParam("customerId") Long customerId, Long bookId) throws OutOfStockException, BookNotFoundException, CustomerNotFoundException {
-        cartService.addItem(customerId, bookId);
-        return Response.status(Response.Status.CREATED).entity(bookService.getBook(bookId)).build();
+    public Response addItem(@PathParam("customerId") Long customerId, Book book) throws OutOfStockException, BookNotFoundException, CustomerNotFoundException {
+        cartService.addItem(customerId, book.getBookId());
+        return Response.status(Response.Status.CREATED).entity(bookService.getBook(book.getBookId())).build();
     }
 
     @GET

@@ -17,11 +17,6 @@ public class CustomerResource {
 
     @POST
     public Response addCustomer(Customer customer) throws InvalidInputException {
-        if (customer == null || customer.getCustomerId() == null || customer.getEmail() == null || customer.getFirstName() == null ||
-                customer.getLastName() == null || customer.getPassword() == null) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "customerId, firstName, lastName, email, password");
-        }
         customerService.addCustomer(customer);
         return Response.status(Response.Status.CREATED).entity(customer).build();
     }
@@ -40,12 +35,6 @@ public class CustomerResource {
     @PUT
     @Path("/{id}")
     public Response updateCustomer(@PathParam("id") Long id, Customer updatedCustomer) throws InvalidInputException, CustomerNotFoundException {
-        if (updatedCustomer == null || updatedCustomer.getCustomerId() == null || updatedCustomer.getEmail() == null || updatedCustomer.getFirstName() == null ||
-                updatedCustomer.getLastName() == null || updatedCustomer.getPassword() == null) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "customerId, firstName, lastName, email, password");
-        }
-
         return Response.status(Response.Status.OK).entity(customerService.updateCustomer(id, updatedCustomer)).build();
     }
 

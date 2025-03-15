@@ -19,10 +19,6 @@ public class AuthorResource {
 
     @POST
     public Response addAuthor(Author author) throws InvalidInputException {
-        if (author == null || author.getAuthorId() == null || author.getFirstName() == null || author.getLastName() == null ) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "authorId, firstName, lastName, biography");
-        }
         authorService.addAuthor(author);
         return Response.status(Response.Status.CREATED).entity(author).build();
     }
@@ -41,19 +37,14 @@ public class AuthorResource {
     @PUT
     @Path("/{id}")
     public Response updateAuthor(@PathParam("id") Long id, Author updatedAuthor) throws InvalidInputException, AuthorNotFoundException {
-        if (updatedAuthor == null || updatedAuthor.getAuthorId() == null || updatedAuthor.getFirstName() == null || updatedAuthor.getLastName() == null) {
-            throw new InvalidInputException("Information is not enough. The following fields are needed: " +
-                    "authorId, firstName, lastName, biography");
-        }
-
         return Response.status(Response.Status.OK).entity(authorService.updateAuthor(id, updatedAuthor)).build();
     }
 
     @DELETE
     @Path("/{id}")
-    public Response deleteAuthor(@PathParam("id") Long id) throws AuthorNotFoundException {
+    public Response deleteAuthor(@PathParam("id") Long id) throws AuthorNotFoundException, InvalidInputException {
         authorService.deleteAuthor(id);
-        return Response.status(Response.Status.OK).entity("Author " + id + " deleted successfully").build();
+        return Response.status(Response.Status.OK).entity("Author with id: " + id + " deleted successfully").build();
     }
 
     @GET
